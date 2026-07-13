@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
@@ -48,7 +50,18 @@ class HomeTab extends StatelessWidget {
                     ),
                   );
                 } else {
-                  return Container();
+                  return SliverGrid.count(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 1.0,
+                    crossAxisSpacing: 1.0,
+                    children: snapshot.data!.docs.map((doc) {
+                      return FadeInImage.memoryNetwork(
+                        placeholder: kTransparentImage,
+                        image: doc.data["image"],
+                        fit: BoxFit.cover,
+                      );
+                    }).toList(),
+                  );
                 }
               },
             ),
