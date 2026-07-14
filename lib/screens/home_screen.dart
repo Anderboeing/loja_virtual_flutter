@@ -12,7 +12,9 @@ class HomeScreen extends StatelessWidget {
     return PageView(
       controller: _pageController,
       physics: NeverScrollableScrollPhysics(),
-      children: [Scaffold(body: HomeTab(), drawer: CustomDrawer())],
+      children: [
+        Scaffold(body: HomeTab(), drawer: CustomDrawer(_pageController)),
+      ],
     );
   }
 }
