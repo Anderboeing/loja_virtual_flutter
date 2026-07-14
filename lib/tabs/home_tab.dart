@@ -50,7 +50,6 @@ class HomeTab extends StatelessWidget {
                     ),
                   );
                 } else {
-                  print(snapshot.data!.docs.length);
                   return SliverGrid.count(
                     crossAxisCount: 2,
                     mainAxisSpacing: 1.0,
