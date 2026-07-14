@@ -50,14 +50,16 @@ class HomeTab extends StatelessWidget {
                     ),
                   );
                 } else {
+                  print(snapshot.data!.docs.length);
                   return SliverGrid.count(
                     crossAxisCount: 2,
                     mainAxisSpacing: 1.0,
                     crossAxisSpacing: 1.0,
                     children: snapshot.data!.docs.map((doc) {
+                      final data = doc.data() as Map<String, dynamic>;
                       return FadeInImage.memoryNetwork(
                         placeholder: kTransparentImage,
-                        image: doc.data["image"],
+                        image: data["image"],
                         fit: BoxFit.cover,
                       );
                     }).toList(),
