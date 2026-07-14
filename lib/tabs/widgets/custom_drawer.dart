@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:loja_virtual/tiles/drawer_tile.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Widget _buildDrawerBack() => Container(
+    Widget buildDrawerBack() => Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [Color.fromARGB(255, 203, 236, 241), Colors.white],
+          colors: [Color.fromARGB(255, 42, 168, 241), Colors.white],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
         ),
@@ -18,7 +19,7 @@ class CustomDrawer extends StatelessWidget {
     return Drawer(
       child: Stack(
         children: [
-          _buildDrawerBack(),
+          buildDrawerBack(),
           ListView(
             padding: EdgeInsets.only(left: 32.0, top: 16.0),
             children: [
@@ -39,9 +40,41 @@ class CustomDrawer extends StatelessWidget {
                         ),
                       ),
                     ),
+                    Positioned(
+                      left: 0.0,
+                      bottom: 0.0,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Olá,",
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          GestureDetector(
+                            child: Text(
+                              "Entre ou cadastre-se >",
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            onTap: () {},
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
+              Divider(),
+              DrawerTile(Icons.home, "Inicio"),
+              DrawerTile(Icons.list, "Produtos"),
+              DrawerTile(Icons.location_on, "Lojas"),
+              DrawerTile(Icons.playlist_add_check, "Meus Pedidos"),
             ],
           ),
         ],
