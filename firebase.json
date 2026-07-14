@@ -1,8 +1,1 @@
-{
-  "firestore": {
-    "database": "(default)",
-    "location": "nam5",
-    "rules": "firestore.rules",
-    "indexes": "firestore.indexes.json"
-  }
-}
+{"firestore":{"database":"(default)","location":"nam5","rules":"firestore.rules","indexes":"firestore.indexes.json"},"flutter":{"platforms":{"android":{"default":{"projectId":"lojavirtual-b2e63","appId":"1:91560208887:android:ddf6089af4bea2a83326f2","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"lojavirtual-b2e63","configurations":{"android":"1:91560208887:android:ddf6089af4bea2a83326f2","web":"1:91560208887:web:9568503580218fe83326f2","windows":"1:91560208887:web:cd60a40f3203fb013326f2"}}}}}}

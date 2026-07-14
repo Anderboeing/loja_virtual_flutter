@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "91560208887",
+    "project_id": "lojavirtual-b2e63",
+    "storage_bucket": "lojavirtual-b2e63.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91560208887:android:ddf6089af4bea2a83326f2",
+        "android_client_info": {
+          "package_name": "br.com.boeing.loja_virtual.loja_virtual"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "91560208887-h8qq8ufr1f6s3los1ei9rptt5gfo8mpd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbKQhlbYqRf1s08wjOnruzB_H_-rmGMWs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "91560208887-h8qq8ufr1f6s3los1ei9rptt5gfo8mpd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
