@@ -5,7 +5,7 @@ class ProductData {
   String id = '';
   String title = '';
   String description = '';
-  double price = 0;
+  double price = 0.0;
 
   List images = [];
   List sizes = [];
@@ -13,10 +13,10 @@ class ProductData {
   ProductData.fromDocument(DocumentSnapshot snapshot) {
     id = snapshot.id;
     final data = snapshot.data() as Map<String, dynamic>?;
-    title = data?["title"];
-    description = data?["description"];
-    price = data?["price"];
-    images = data?["images"];
-    sizes = data?["sizes"];
+    title = data?["title"] ?? "Sem titulo";
+    description = data?["description"] ?? "Sem descrição";
+    price = data?["price"] ?? 0.0;
+    images = data?["images"] ?? [];
+    sizes = data?["sizes"] ?? [];
   }
 }
