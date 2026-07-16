@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:loja_virtual/screens/signup_screen.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+class SignUpScreen extends StatelessWidget {
+  SignUpScreen({super.key});
 
   final _formKey = GlobalKey<FormState>();
 
@@ -10,29 +9,24 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Entrar", style: TextStyle(color: Colors.white)),
+        title: Text("Criar Conta", style: TextStyle(color: Colors.white)),
         backgroundColor: Theme.of(context).primaryColor,
         centerTitle: true,
-        actions: [
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => SignUpScreen()),
-              );
-            },
-            child: Text(
-              "CRIAR CONTA",
-              style: TextStyle(fontSize: 15.0, color: Colors.white),
-            ),
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
-          ),
-        ],
       ),
       body: Form(
         key: _formKey,
         child: ListView(
           padding: EdgeInsets.all(16.0),
           children: [
+            TextFormField(
+              decoration: InputDecoration(hintText: "Nome Completo"),
+              validator: (value) {
+                if (value == '') {
+                  return "Nome inválido!";
+                }
+              },
+            ),
+            SizedBox(height: 16.0),
             TextFormField(
               decoration: InputDecoration(hintText: "E-mail"),
               keyboardType: TextInputType.emailAddress,
@@ -53,12 +47,13 @@ class LoginScreen extends StatelessWidget {
               },
             ),
             SizedBox(height: 16.0),
-            Align(
-              alignment: Alignment.centerRight,
-              child: ElevatedButton(
-                onPressed: () {},
-                child: Text("Esqueci minha senha", textAlign: TextAlign.right),
-              ),
+            TextFormField(
+              decoration: InputDecoration(hintText: "Endereço"),
+              validator: (value) {
+                if (value == '') {
+                  return "Endereço inválido";
+                }
+              },
             ),
             SizedBox(height: 16.0),
             SizedBox(
@@ -68,7 +63,7 @@ class LoginScreen extends StatelessWidget {
                   if (_formKey.currentState!.validate()) {}
                 },
                 child: Text(
-                  "Entrar",
+                  "Criar Conta",
                   style: TextStyle(fontSize: 18.0, color: Colors.white),
                 ),
                 style: ElevatedButton.styleFrom(
