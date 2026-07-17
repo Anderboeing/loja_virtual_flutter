@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:loja_virtual/models/user_model.dart';
 import 'package:loja_virtual/screens/home_screen.dart';
+import 'package:scoped_model/scoped_model.dart';
 import 'firebase_options.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -17,14 +19,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Loja',
-      theme: ThemeData(
-        colorScheme: .fromSeed(seedColor: Color.fromARGB(255, 4, 125, 141)),
-        primarySwatch: Colors.blue,
+    return ScopedModel<UserModel>(
+      model: UserModel(),
+      child: MaterialApp(
+        title: 'Flutter Loja',
+        theme: ThemeData(
+          colorScheme: .fromSeed(seedColor: Color.fromARGB(255, 4, 125, 141)),
+          primarySwatch: Colors.blue,
+        ),
+        debugShowCheckedModeBanner: false,
+        home: HomeScreen(),
       ),
-      debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
     );
   }
 }
