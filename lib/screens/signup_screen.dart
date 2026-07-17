@@ -110,7 +110,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  void _onSuccess() {}
+  void _onSuccess() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Usuário criado com sucesso!"),
+        backgroundColor: Theme.of(context).primaryColor,
+        duration: Duration(seconds: 2),
+      ),
+    );
 
-  void _onFail() {}
+    Future.delayed(Duration(seconds: 2)).then((_) {
+      Navigator.of(context).pop();
+    });
+  }
+
+  void _onFail() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Falha ao criar usuário!"),
+        backgroundColor: Colors.redAccent,
+        duration: Duration(seconds: 2),
+      ),
+    );
+  }
 }
