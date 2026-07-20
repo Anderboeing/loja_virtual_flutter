@@ -22,9 +22,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScopedModel<UserModel>(
       model: UserModel(),
-      child: ScopedModelDescendant(builder: (context, child, model) {
+      child: ScopedModelDescendant<UserModel>(builder: (context, child, model) {
         return ScopedModel<CartModel>(
-          model: CartModel(model as UserModel),
+          model: CartModel(model),
           child: MaterialApp(
             title: 'Flutter Loja',
             theme: ThemeData(
