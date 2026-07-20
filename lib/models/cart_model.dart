@@ -11,6 +11,8 @@ class CartModel extends Model {
 
   CartModel(this.user);
 
+  static CartModel of(BuildContext context) => ScopedModel.of<CartModel>(context);
+
   void addCartItem(CartProduct cartProduct) {
     products.add(cartProduct);
     FirebaseFirestore.instance.collection("users").doc(user.firebaseUser?.uid).collection("cart").add(cartProduct.toMap()).then((doc) {

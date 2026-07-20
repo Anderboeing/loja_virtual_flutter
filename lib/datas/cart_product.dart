@@ -9,7 +9,9 @@ class CartProduct {
   int quantity = 0;
   String size = "";
 
-  late ProductData productData;
+  ProductData? productData;
+
+  CartProduct();
 
   CartProduct.fromDocument(DocumentSnapshot document) {
     final data = document.data() as Map<String, dynamic>?;
@@ -26,7 +28,7 @@ class CartProduct {
       "pid": pid,
       "quantity": quantity,
       "size": size,
-      "product": productData.toResumedMap(),
+      //"product": productData.toResumedMap(),
     };
   }
 
