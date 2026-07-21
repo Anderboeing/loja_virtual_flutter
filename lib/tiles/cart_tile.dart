@@ -12,7 +12,69 @@ class CartTile extends StatelessWidget {
   Widget build(BuildContext context) {
 
     Widget _buildContent() {
-      return Container();
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Container(
+            padding: EdgeInsets.all(8.0),
+            width: 120.0,
+            child: (_cartProduct.productData?.images?.isEmpty ?? true)
+              ? const Center(child: Icon(Icons.image_not_supported))
+              : Image.network(
+                  _cartProduct.productData!.images[0],
+                  fit: BoxFit.cover,
+                ),        
+          ),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    _cartProduct.productData?.title ?? '',
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 17.0),
+                  ),
+                  Text(
+                    "Tamanho: ${_cartProduct.size}",
+                    style: TextStyle(fontWeight: FontWeight.w300),
+                  ),
+                  Text(
+                    "R\$ ${_cartProduct.productData?.price.toStringAsFixed(2)}",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0, color: Theme.of(context).primaryColor),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.remove),
+                        color: Theme.of(context).primaryColor,
+                        onPressed: _cartProduct.quantity > 1 ? (){} : null, 
+                      ),
+                      Text(_cartProduct.quantity.toString()),
+                      IconButton(
+                        icon: Icon(Icons.add),
+                        color: Theme.of(context).primaryColor,
+                        onPressed: () {
+
+                        }, 
+                      ),
+                      ElevatedButton(
+                        child: Text("Remover", style: TextStyle(color: Colors.grey[500]),),
+                        onPressed: () {
+
+                        }, 
+                        
+                      )
+                    ],
+                  )
+                ],
+              ),
+            )
+          )
+        ],
+      );
     }
 
     return Card(
