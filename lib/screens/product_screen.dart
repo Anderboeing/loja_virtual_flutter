@@ -113,6 +113,8 @@ class _ProductScreenState extends State<ProductScreen> {
                         cartProduct.quantity = 1;
                         cartProduct.pid = product.id;
                         cartProduct.category = product.category;
+                        // Attach the full product data so CartTile can display image, price, etc. without another Firestore fetch
+                        cartProduct.productData = product;
 
                         CartModel.of(context).addCartItem(cartProduct);
                         Navigator.of(context).push(MaterialPageRoute(builder: (context)=> CartScreen()));
