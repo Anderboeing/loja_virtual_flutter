@@ -88,7 +88,7 @@ class CartModel extends Model {
         DocumentSnapshot productSnap = await FirebaseFirestore.instance
             .collection("products")
             .doc(cartProduct.category)
-            .collection("items")
+            .collection("itens")
             .doc(cartProduct.pid)
             .get();
         if (productSnap.exists) {

@@ -1,7 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:loja_virtual/datas/cart_product.dart';
-import 'package:loja_virtual/datas/product_data.dart';
 import 'package:loja_virtual/models/cart_model.dart';
 
 class CartTile extends StatelessWidget {
@@ -11,97 +9,87 @@ class CartTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Os dados do produto já foram carregados pelo CartModel._loadCartItems()
+    // antes de notifyListeners() ser chamado. Basta exibir os dados.
+    final productData = _cartProduct.productData;
 
-    Widget _buildContent() {
-      CartModel.of(context).updatePrices();
+    if (productData == null) {
+      return Card(
+        margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+        child: Container(
+          height: 70.0,
+          alignment: Alignment.center,
+          child: const CircularProgressIndicator(),
+        ),
+      );
+    }
 
-      return Row(
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             width: 120.0,
-            child: (_cartProduct.productData?.images?.isEmpty ?? true)
+            child: (productData.images.isEmpty)
               ? const Center(child: Icon(Icons.image_not_supported))
               : Image.network(
-                  _cartProduct.productData!.images[0],
+                  productData.images[0],
                   fit: BoxFit.cover,
-                ),        
+                ),
           ),
           Expanded(
             child: Container(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    _cartProduct.productData?.title ?? '',
-                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 17.0),
+                    productData.title,
+                    style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 17.0),
                   ),
                   Text(
                     "Tamanho: ${_cartProduct.size}",
-                    style: TextStyle(fontWeight: FontWeight.w300),
+                    style: const TextStyle(fontWeight: FontWeight.w300),
                   ),
                   Text(
-                    "R\$ ${_cartProduct.productData?.price.toStringAsFixed(2)}",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0, color: Theme.of(context).primaryColor),
+                    "R\$ ${productData.price.toStringAsFixed(2)}",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                      color: Theme.of(context).primaryColor,
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       IconButton(
-                        icon: Icon(Icons.remove),
+                        icon: const Icon(Icons.remove),
                         color: Theme.of(context).primaryColor,
-                        onPressed: _cartProduct.quantity > 1 ? (){
-                          CartModel.of(context).decProduct(_cartProduct);
-                        } : null, 
+                        onPressed: _cartProduct.quantity > 1
+                          ? () => CartModel.of(context).decProduct(_cartProduct)
+                          : null,
                       ),
                       Text(_cartProduct.quantity.toString()),
                       IconButton(
-                        icon: Icon(Icons.add),
+                        icon: const Icon(Icons.add),
                         color: Theme.of(context).primaryColor,
-                        onPressed: () {
-                          CartModel.of(context).incProduct(_cartProduct);
-                        }, 
+                        onPressed: () => CartModel.of(context).incProduct(_cartProduct),
                       ),
                       ElevatedButton(
-                        child: Text("Remover", style: TextStyle(color: Colors.grey[500]),),
-                        onPressed: () {
-                          CartModel.of(context).removeCartItem(_cartProduct);
-                        }, 
-                        
-                      )
+                        child: Text("Remover", style: TextStyle(color: Colors.grey[500])),
+                        onPressed: () => CartModel.of(context).removeCartItem(_cartProduct),
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
-            )
-          )
+            ),
+          ),
         ],
-      );
-    }
-
-    return Card(
-      margin: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-      child: _cartProduct.productData == null ?
-        FutureBuilder<DocumentSnapshot>(
-          future: FirebaseFirestore.instance.collection("products").doc(_cartProduct.category).collection("items").doc(_cartProduct.pid).get(), 
-          builder: (context, snapshot) {
-            if(snapshot.hasData) {
-              _cartProduct.productData = ProductData.fromDocument(snapshot.data!);
-              return _buildContent();
-            } else {
-              return Container(
-                height: 70.0,
-                child: CircularProgressIndicator(),
-                alignment: Alignment.center,
-              );
-            }
-          })
-        :
-          _buildContent()
-          ,
+      ),
     );
   }
 }
